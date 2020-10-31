@@ -3,20 +3,14 @@
 namespace zetton {
 namespace common {
 
-GstRtspStream::GstRtspStream(const std::string& url) : BaseStream(url) {
-  Init(url, "omxh264dec", "", "");
+bool GstRtspStream::open(const std::string& url) {
+  return open(url, "omxh264dec", "", "");
 }
 
-GstRtspStream::GstRtspStream(const std::string& url, const std::string& decoder,
-                             const std::string& user_id,
-                             const std::string& user_pw)
-    : BaseStream(url) {
-  Init(url, decoder, user_id, user_pw);
-}
-
-bool GstRtspStream::Init(const std::string& url, const std::string& decoder,
+bool GstRtspStream::open(const std::string& url, const std::string& decoder,
                          const std::string& user_id,
                          const std::string& user_pw) {
+  url_ = url;
   if (url.find("rtsp") == 0) {
     // input url is a RTSP stream
     pipeline_ = "rtspsrc latency=0 location=" + url;
@@ -32,10 +26,7 @@ bool GstRtspStream::Init(const std::string& url, const std::string& decoder,
     api_ = cv::CAP_ANY;
   }
   std::cout << "Open pipeline: " << pipeline_ << std::endl;
-  open();
-}
 
-bool GstRtspStream::open() {
   cap_.open(pipeline_, api_);
   return cap_.isOpened();
 }
@@ -59,6 +50,8 @@ bool GstRtspStream::read(void* frame_data) {
   frame_data = frame.data;
   return ret;
 }
+
+ZETTON_REGISTER_STREAM(GstRtspStream);
 
 }  // namespace common
 }  // namespace zetton
