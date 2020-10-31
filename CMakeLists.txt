@@ -13,6 +13,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/util.cmake)
 
 # find dependencies
 find_package(Threads REQUIRED)
+find_package(OpenCV REQUIRED)
 
 # ROS
 find_package(catkin REQUIRED COMPONENTS
@@ -28,6 +29,7 @@ catkin_package(
 include_directories(
     include
     ${catkin_INCLUDE_DIRS}
+    ${OpenCV_INCLUDE_DIRS}
 )
 
 # find all source files
@@ -47,6 +49,7 @@ target_link_libraries(
     ${PROJECT_NAME}
     ${catkin_LIBRARIES}
     Threads::Threads
+    ${OpenCV_LIBS}
 )
 
 # installation
