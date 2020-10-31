@@ -21,7 +21,6 @@ class GstRtspStream : public BaseStream {
   bool read(void *frame_data) override;
 
  protected:
-
   std::string pipeline_;
   int api_ = cv::CAP_GSTREAMER;
   cv::VideoCapture cap_;
