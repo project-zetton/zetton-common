@@ -13,10 +13,40 @@ class BaseStream {
   explicit BaseStream() = default;
   ~BaseStream() = default;
 
+  /**
+   * @brief Opens a video stream for video capturing.
+   *
+   * @param url The stream url
+   * @return `true` if the operation is successful
+   */
   virtual bool open(const std::string &url) = 0;
+
+  /**
+   * @brief Returns true if video capturing has been initialized already.
+   *
+   * @return true if video capturing has been initialized already
+   */
   virtual bool isOpened() = 0;
+
+  /**
+   * @brief Closes video stream.
+   */
   virtual void release() = 0;
+
+  /**
+   * @brief Grabs, decodes and returns the next video frame.
+   *
+   * @param frame The captured frame as output
+   * @return `false` if no frames has been grabbed
+   */
   virtual bool read(cv::Mat &frame) = 0;
+
+  /**
+   * @brief Grabs, decodes and returns the next video frame.
+   *
+   * @param frame The captured frame as output
+   * @return `false` if no frames has been grabbed
+   */
   virtual bool read(void *frame_data) = 0;
 
  protected:

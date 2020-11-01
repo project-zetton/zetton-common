@@ -13,7 +13,7 @@ class GstRtspStream : public BaseStream {
   ~GstRtspStream() = default;
 
   bool open(const std::string &url) override;
-  bool open(const std::string &url, const std::string &decoder ,
+  bool open(const std::string &url, const std::string &decoder,
             const std::string &user_id = "", const std::string &user_pw = "");
   bool isOpened() override;
   void release() override;
@@ -21,8 +21,19 @@ class GstRtspStream : public BaseStream {
   bool read(void *frame_data) override;
 
  protected:
+  /**
+   * @brief GStreamer pipeline string
+   */
   std::string pipeline_;
+
+  /**
+   * @brief API reference for OpenCV VideoCapture
+   */
   int api_ = cv::CAP_GSTREAMER;
+
+  /**
+   * @brief instance of OpenCV VideoCapture
+   */
   cv::VideoCapture cap_;
 };
 
