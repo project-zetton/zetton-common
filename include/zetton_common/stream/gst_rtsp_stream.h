@@ -13,7 +13,7 @@ class GstRtspStream : public BaseStream {
   ~GstRtspStream() = default;
 
   bool open(const std::string &url) override;
-  bool open(const std::string &url, const std::string &decoder = "omxh264dec",
+  bool open(const std::string &url, const std::string &decoder ,
             const std::string &user_id = "", const std::string &user_pw = "");
   bool isOpened() override;
   void release() override;
