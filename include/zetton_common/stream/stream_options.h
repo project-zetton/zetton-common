@@ -76,14 +76,6 @@ struct StreamOptions {
 
  public:
   StreamOptions();
-
-  // void Print(const char* prefix = NULL) const;
-  // bool Parse(const char* URI, const int argc, char** argv, IoType ioType);
-  // bool Parse(const char* URI, const commandLine& cmdLine, IoType ioType);
-  // bool Parse(const int argc, char** argv, IoType ioType,
-  //            int ioPositionArg = -1);
-  // bool Parse(const commandLine& cmdLine, IoType ioType, int ioPositionArg =
-  // -1);
 };
 
 }  // namespace common
