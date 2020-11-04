@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
   while (true) {
     cv::Mat frame;
     if (source->Capture(frame)) {
-      ROS_INFO("User: %dx%d", frame.cols, frame.rows);
+      ROS_INFO("Recv frame: %dx%d", frame.cols, frame.rows);
     }
     usleep(100000);
   }

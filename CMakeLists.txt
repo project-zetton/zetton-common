@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-add_definitions(-Wall -Wextra -Wno-unused-parameter -g)
+add_definitions(-Wall -Wextra -Wno-unused-parameter -O2)
 
 # useful macros
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/util.cmake)

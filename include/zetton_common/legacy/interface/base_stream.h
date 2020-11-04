@@ -7,6 +7,7 @@
 
 namespace zetton {
 namespace common {
+namespace legacy {
 
 class BaseStream {
  public:
@@ -56,5 +57,6 @@ class BaseStream {
 #define ZETTON_REGISTER_STREAM(name) ZETTON_REGISTER_CLASS(BaseStream, name)
 };
 
+}  // namespace lagecy
 }  // namespace common
 }  // namespace zetton

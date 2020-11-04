@@ -2,10 +2,11 @@
 
 #include <string>
 
-#include "zetton_common/interface/base_stream.h"
+#include "zetton_common/legacy/interface/base_stream.h"
 
 namespace zetton {
 namespace common {
+namespace legacy {
 
 class GstRtspStream : public BaseStream {
  public:
@@ -37,5 +38,6 @@ class GstRtspStream : public BaseStream {
   cv::VideoCapture cap_;
 };
 
+}  // namespace legacy
 }  // namespace common
 }  // namespace zetton
