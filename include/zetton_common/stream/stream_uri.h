@@ -16,8 +16,8 @@ enum StreamProtocolType {
   PROTOCOL_MAX_NUM,
 };
 
-static const char* StreamProtocolTypeToStr(StreamProtocolType type);
-static StreamProtocolType StreamProtocolTypeFromStr(const char* str);
+const char* StreamProtocolTypeToStr(StreamProtocolType type);
+StreamProtocolType StreamProtocolTypeFromStr(const char* str);
 
 struct StreamUri {
   std::string string;
@@ -27,9 +27,12 @@ struct StreamUri {
   int port;
 
   StreamUri();
-  StreamUri(const char* uri);
+  explicit StreamUri(const char* uri);
+  explicit StreamUri(const std::string& uri);
+
   bool Parse(const char* uri);
   void Print(const char* prefix = "") const;
+
   inline const char* c_str() const { return string.c_str(); }
   operator const char*() const { return string.c_str(); }
   operator std::string() const { return string; }

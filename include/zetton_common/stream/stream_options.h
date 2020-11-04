@@ -8,56 +8,63 @@ namespace zetton {
 namespace common {
 
 enum StreamDeviceType {
-  DEVICE_DEFAULT = 0, /**< Unknown interface type. */
-  DEVICE_V4L2,        /**< V4L2 webcam (e.g. `/dev/video0`) */
-  DEVICE_CSI,         /**< MIPI CSI camera */
-  DEVICE_IP,          /**< IP-based network stream (e.g. RTP/RTSP) */
-  DEVICE_FILE,   /**< Disk-based stream from a file or directory of files */
-  DEVICE_DISPLAY /**< OpenGL output stream rendered to an attached display */
+  DEVICE_DEFAULT = 0,
+  DEVICE_V4L2,
+  DEVICE_CSI,
+  DEVICE_IP,
+  DEVICE_FILE,
+  DEVICE_DISPLAY,
+  DEVICE_MAX_NUM
 };
 
-static const char* StreamDeviceTypeToStr(StreamDeviceType type);
-static StreamDeviceType StreamDeviceTypeFromStr(const char* str);
+const char* StreamDeviceTypeToStr(StreamDeviceType type);
+StreamDeviceType StreamDeviceTypeFromStr(const char* str);
 
-enum StreamIoType {
-  INPUT = 0, /**< Input stream (e.g. camera, video/image file, ect.) */
-  OUTPUT,    /**< Output stream (e.g. display, video/image file, ect.) */
-};
+enum StreamIoType { IO_INPUT = 0, IO_OUTPUT, IO_MAX_NUM };
 
-static const char* StreamIoTypeToStr(StreamIoType type);
-static StreamIoType StreamIoTypeFromStr(const char* str);
+const char* StreamIoTypeToStr(StreamIoType type);
+StreamIoType StreamIoTypeFromStr(const char* str);
 
 enum StreamFlipMethod {
-  FLIP_NONE = 0,             /**< Identity (no rotation) */
-  FLIP_COUNTERCLOCKWISE,     /**< Rotate counter-clockwise 90 degrees */
-  FLIP_ROTATE_180,           /**< Rotate 180 degrees */
-  FLIP_CLOCKWISE,            /**< Rotate clockwise 90 degrees */
-  FLIP_HORIZONTAL,           /**< Flip horizontally */
-  FLIP_UPPER_RIGHT_DIAGONAL, /**< Flip across upper right/lower left diagonal
-                              */
-  FLIP_VERTICAL,             /**< Flip vertically */
-  FLIP_UPPER_LEFT_DIAGONAL,  /**< Flip across upper left/lower right diagonal
-                              */
-  FLIP_DEFAULT = FLIP_NONE   /**< Default setting (none) */
+  FLIP_NONE = 0,
+  FLIP_COUNTERCLOCKWISE,
+  FLIP_ROTATE_180,
+  FLIP_CLOCKWISE,
+  FLIP_HORIZONTAL,
+  FLIP_UPPER_RIGHT_DIAGONAL,
+  FLIP_VERTICAL,
+  FLIP_UPPER_LEFT_DIAGONAL,
+  FLIP_MAX_NUM
 };
 
-static const char* StreamFlipMethodToStr(StreamFlipMethod flip);
-static StreamFlipMethod StreamFlipMethodFromStr(const char* str);
+const char* StreamFlipMethodToStr(StreamFlipMethod flip);
+StreamFlipMethod StreamFlipMethodFromStr(const char* str);
 
 enum StreamCodec {
-  CODEC_UNKNOWN = 0, /**< Unknown/unsupported codec */
-  CODEC_RAW,         /**< Uncompressed (e.g. RGB) */
-  CODEC_H264,        /**< H.264 */
-  CODEC_H265,        /**< H.265 */
-  CODEC_VP8,         /**< VP8 */
-  CODEC_VP9,         /**< VP9 */
-  CODEC_MPEG2,       /**< MPEG2 (decode only) */
-  CODEC_MPEG4,       /**< MPEG4 (decode only) */
-  CODEC_MJPEG        /**< MJPEG */
+  CODEC_UNKNOWN = 0,
+  CODEC_RAW,
+  CODEC_H264,
+  CODEC_H265,
+  CODEC_VP8,
+  CODEC_VP9,
+  CODEC_MPEG2,
+  CODEC_MPEG4,
+  CODEC_MJPEG,
+  CODEC_MAX_NUM
 };
 
-static const char* StreamCodecToStr(StreamCodec codec);
-static StreamCodec StreamCodecFromStr(const char* str);
+const char* StreamCodecToStr(StreamCodec codec);
+StreamCodec StreamCodecFromStr(const char* str);
+
+enum StreamPlatformType {
+  PLATFORM_CPU = 0,
+  PLATFORM_GPU,
+  PLATFORM_JETSON,
+  PLATFORM_MAX_NUM
+};
+
+const char* StreamPlatformTypeToStr(StreamPlatformType platform);
+StreamPlatformType StreamPlatformTypeFromStr(const char* str);
 
 struct StreamOptions {
  public:
@@ -69,10 +76,12 @@ struct StreamOptions {
   uint32_t num_buffers;
   bool zero_copy;
   int loop;
+
   StreamDeviceType device_type;
   StreamIoType io_type;
   StreamFlipMethod flip_method;
   StreamCodec codec;
+  StreamPlatformType platform;
 
  public:
   StreamOptions();

@@ -29,24 +29,6 @@ StreamSourceType StreamSourceTypeFromStr(const char* str) {
   return StreamSourceType::SOURCE_UNKNOWN;
 }
 
-BaseStreamSource* BaseStreamSource::Create(const StreamOptions& options) {
-  BaseStreamSource* src = nullptr;
-  const StreamUri& uri = options.resource;
-
-  // TODO(corenel): parse uri and create corresponding source
-
-  if (!src) return nullptr;
-
-  return src;
-}
-
-BaseStreamSource* BaseStreamSource::Create(const char* resource,
-                                           const StreamOptions& options) {
-  StreamOptions opt = options;
-  opt.resource = resource;
-  return Create(opt);
-}
-
 bool BaseStreamSource::Open() {
   is_streaming_ = true;
   return true;

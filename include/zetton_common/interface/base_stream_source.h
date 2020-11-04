@@ -13,14 +13,14 @@ enum StreamSourceType {
   SOURCE_MAX_NUM,
 };
 
-static const char* StreamProtocolTypeToStr(StreamProtocolType type);
-static StreamProtocolType StreamProtocolTypeFromStr(const char* str);
+const char* StreamProtocolTypeToStr(StreamProtocolType type);
+StreamProtocolType StreamProtocolTypeFromStr(const char* str);
 
 class BaseStreamSource {
  public:
-  static BaseStreamSource* Create(const StreamOptions& options);
-  static BaseStreamSource* Create(const char* resource,
-                                  const StreamOptions& options);
+  BaseStreamSource() = default;
+  explicit BaseStreamSource(const StreamOptions& options)
+      : is_streaming_(false), options_(options){};
   virtual ~BaseStreamSource() = default;
 
   inline bool IsStreaming() const { return is_streaming_; }
@@ -37,8 +37,6 @@ class BaseStreamSource {
   virtual void Close();
 
  protected:
-  BaseStreamSource(const StreamOptions& options) : options_(options){};
-
   bool is_streaming_;
   StreamOptions options_;
 };

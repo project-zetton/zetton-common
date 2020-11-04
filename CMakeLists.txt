@@ -3,10 +3,11 @@ cmake_minimum_required(VERSION 3.13)
 project(zetton_common)
 
 # set compilation
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-add_definitions(-Wall -Wextra -Wno-unused-parameter -O2)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+add_definitions(-Wall -Wextra -Wno-unused-parameter -g)
 
 # useful macros
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/util.cmake)
@@ -65,3 +66,5 @@ install(DIRECTORY include/${PROJECT_NAME}/
 install(DIRECTORY config/
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config
     PATTERN ".svn" EXCLUDE)
+
+add_simple_examples()

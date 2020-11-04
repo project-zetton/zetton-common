@@ -48,6 +48,9 @@ StreamUri::StreamUri() { port = -1; }
 // constructor
 StreamUri::StreamUri(const char* uri) { Parse(uri); }
 
+// constructor
+StreamUri::StreamUri(const std::string& uri) { Parse(uri.c_str()); }
+
 // Parse
 bool StreamUri::Parse(const char* uri) {
   if (!uri) return false;
