@@ -13,11 +13,15 @@ Recommended environment:
 
 ## Usage
 
-### RTSP stream
+### Stream
 
-Receive RTSP stream by OpenCV + GStreamer
+- `CvGstStreamSource`: capturing stream with OpenCV and GStreamer. [[example code]](example/cv_gst_rtsp_stream.cc)
 
-- Choose `avdec_h264` for PC and `omxh264dec` for Jetson devices
+   | Platform   | Protocol | Codec | Result                              |
+   | ---------- | -------- | ----- | ----------------------------------- |
+   | PC w/ CPU  | RTSP     | H264  | Works                               |
+   | PC w/ GPU  | RTSP     | H264  | Works in GUI (not in headless mode) |
+   | Jetson TX2 | RTSP     | H264  | Works                               |
 
 ## License
 

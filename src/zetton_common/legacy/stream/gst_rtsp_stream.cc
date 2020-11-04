@@ -1,7 +1,8 @@
-#include "zetton_common/stream/gst_rtsp_stream.h"
+#include "zetton_common/legacy/stream/gst_rtsp_stream.h"
 
 namespace zetton {
 namespace common {
+namespace legacy {
 
 bool GstRtspStream::open(const std::string& url) {
   return open(url, "omxh264dec", "", "");
@@ -53,5 +54,6 @@ bool GstRtspStream::read(void* frame_data) {
 
 ZETTON_REGISTER_STREAM(GstRtspStream);
 
+}  // namespace legacy
 }  // namespace common
 }  // namespace zetton
