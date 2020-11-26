@@ -29,12 +29,5 @@ StreamSourceType StreamSourceTypeFromStr(const char* str) {
   return StreamSourceType::SOURCE_UNKNOWN;
 }
 
-bool BaseStreamSource::Open() {
-  is_streaming_ = true;
-  return true;
-}
-
-void BaseStreamSource::Close() { is_streaming_ = false; }
-
 }  // namespace common
 }  // namespace zetton
