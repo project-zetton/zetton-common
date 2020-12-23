@@ -41,7 +41,6 @@ class RosNodeHandler {
   DECLARE_SINGLETON(RosNodeHandler)
 };
 
-RosNodeHandler::RosNodeHandler(){};
 
 }  // namespace common
 }  // namespace zetton
