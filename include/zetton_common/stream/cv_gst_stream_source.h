@@ -17,6 +17,7 @@ class CvGstStreamSource : public BaseStreamSource {
   static bool IsSupportedExtension(const char* ext);
 
   bool Init(const StreamOptions& options);
+  bool Init(const std::string& pipeline);
   bool Open() override;
   void Close() override;
   bool Capture(cv::Mat& frame);

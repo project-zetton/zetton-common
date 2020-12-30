@@ -36,6 +36,13 @@ bool CvGstStreamSource::Init(const StreamOptions& options) {
     return false;
   }
 
+  // init by pipeline string
+  return Init(pipeline_string_);
+}
+
+bool CvGstStreamSource::Init(const std::string& pipeline) {
+  pipeline_string_ = pipeline;
+
   // create pipeline
   cap_ =
       std::make_shared<cv::VideoCapture>(pipeline_string_, cv::CAP_GSTREAMER);
