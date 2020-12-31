@@ -1,6 +1,7 @@
 #pragma once
 
 #include <atomic>
+#include <functional>
 #include <thread>
 
 #include "opencv2/opencv.hpp"
@@ -22,6 +23,8 @@ class CvGstStreamSource : public BaseStreamSource {
   void Close() override;
   bool Capture(cv::Mat& frame);
 
+  void RegisterCallback(std::function<void(const cv::Mat& frame)>);
+
   static const char* SupportedExtensions[];
 
  protected:
@@ -36,6 +39,9 @@ class CvGstStreamSource : public BaseStreamSource {
   std::shared_ptr<CircularBuffer<cv::Mat>> buffer_;
   std::shared_ptr<std::thread> thread_capturing_;
   std::atomic<bool> stop_flag_{false};
+
+  std::function<void(const cv::Mat& frame)> callback_;
+  bool callback_registered_;
 };
 
 }  // namespace common

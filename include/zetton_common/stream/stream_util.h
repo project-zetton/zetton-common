@@ -62,19 +62,19 @@ inline bool BuildGstPipelineString(const StreamUri& uri, StreamOptions& options,
           "string)";
     // demux
     if (options.codec == StreamCodec::CODEC_H264) {
-      ss << "H264\" ! rtph264depay ! h264parse ! ";
+      ss << "H264\"! rtpjitterbuffer ! rtph264depay ! h264parse ! ";
     } else if (options.codec == StreamCodec::CODEC_H265) {
-      ss << "H265\" ! rtph265depay ! h265parse ! ";
+      ss << "H265\"! rtpjitterbuffer ! rtph265depay ! h265parse ! ";
     } else if (options.codec == StreamCodec::CODEC_VP8) {
-      ss << "VP8\" ! rtpvp8depay ! ";
+      ss << "VP8\"! rtpjitterbuffer ! rtpvp8depay ! ";
     } else if (options.codec == StreamCodec::CODEC_VP9) {
-      ss << "VP9\" ! rtpvp9depay ! ";
+      ss << "VP9\"! rtpjitterbuffer ! rtpvp9depay ! ";
     } else if (options.codec == StreamCodec::CODEC_MPEG2) {
-      ss << "MP2T\" ! rtpmp2tdepay ! ";
+      ss << "MP2T\"! rtpjitterbuffer ! rtpmp2tdepay ! ";
     } else if (options.codec == StreamCodec::CODEC_MPEG4) {
-      ss << "MP4V-ES\" ! rtpmp4vdepay ! ";
+      ss << "MP4V-ES\"! rtpjitterbuffer ! rtpmp4vdepay ! ";
     } else if (options.codec == StreamCodec::CODEC_MJPEG) {
-      ss << "JPEG\" ! rtpjpegdepay ! ";
+      ss << "JPEG\"! rtpjitterbuffer ! rtpjpegdepay ! ";
     }
   } else if (uri.protocol == StreamProtocolType::PROTOCOL_RTSP) {
     // build pipeline for RTSP source

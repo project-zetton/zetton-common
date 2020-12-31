@@ -62,6 +62,13 @@ void CvGstStreamSource::CaptureFrames() {
     cap_->read(frame);
     if (!frame.empty()) {
       buffer_->put(frame);
+      if (callback_registered_) {
+        try {
+          callback_(frame);
+        } catch (std::exception& e) {
+          ROS_ERROR_STREAM(e.what());
+        }
+      }
     }
   }
 };
@@ -86,6 +93,12 @@ bool CvGstStreamSource ::Capture(cv::Mat& frame) {
   } else {
     return false;
   }
+}
+
+void CvGstStreamSource::RegisterCallback(
+    std::function<void(const cv::Mat& frame)> callback) {
+  callback_ = callback;
+  callback_registered_ = true;
 }
 
 const char* CvGstStreamSource::SupportedExtensions[] = {
