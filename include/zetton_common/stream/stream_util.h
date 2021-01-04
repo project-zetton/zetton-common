@@ -10,10 +10,22 @@
 namespace zetton {
 namespace common {
 
-inline bool BuildGstPipelineString(const StreamUri& uri, StreamOptions& options,
-                                   std::string& pipeline_string,
-                                   const bool& use_custom_size = false,
-                                   const bool& use_custom_rate = false) {
+inline bool IsGstSupportedExtension(const char* ext, const char** supported) {
+  if (!ext) return false;
+
+  uint32_t ext_count = 0;
+  while (true) {
+    if (!supported[ext_count]) break;
+    if (strcasecmp(supported[ext_count], ext) == 0) return true;
+    ext_count++;
+  }
+
+  return false;
+}
+
+inline bool BuildGstCapturingPipelineString(
+    const StreamUri& uri, StreamOptions& options, std::string& pipeline_string,
+    const bool& use_custom_size = false, const bool& use_custom_rate = false) {
   std::ostringstream ss;
 
   // determine the source protocol
@@ -209,18 +221,45 @@ inline bool BuildGstPipelineString(const StreamUri& uri, StreamOptions& options,
   return true;
 };
 
-inline bool IsGstSupportedExtension(const char* ext, const char** supported) {
-  if (!ext) return false;
+inline bool BuildGstOutputtingPipelineString(const StreamUri& uri,
+                                             StreamOptions& options,
+                                             std::string& pipeline_string) {
+  std::ostringstream ss;
 
-  uint32_t ext_count = 0;
-  while (true) {
-    if (!supported[ext_count]) break;
-    if (strcasecmp(supported[ext_count], ext) == 0) return true;
-    ext_count++;
+  // setup appsrc input element
+  ss << "appsrc name=mysource is-live=true do-timestamp=true format=3 ! ";
+
+  // set default bitrate (if needed)
+  if (options.bit_rate == 0) {
+    options.bit_rate = 4000000;
   }
 
+  // determine the requested protocol to use
+  if (options.codec == videoOptions::CODEC_H264) {
+    ss << "omxh264enc bitrate=" << options.bit_rate << " ! video/x-h264 !  ";
+  } else if (options.codec == StreamCodec::CODEC_H265) {
+    ss << "omxh265enc bitrate=" << options.bit_rate << " ! video/x-h265 ! ";
+  } else if (options.codec == StreamCodec::CODEC_VP8) {
+    ss << "omxvp8enc bitrate=" << options.bit_rate << " ! video/x-vp8 ! ";
+  } else if (options.codec == StreamCodec::CODEC_VP9) {
+    ss << "omxvp9enc bitrate=" << options.bit_rate << " ! video/x-vp9 ! ";
+  } else if (options.codec == StreamCodec::CODEC_MJPEG) {
+    ss << "nvjpegenc ! image/jpeg ! ";
+  } else {
+    ROS_ERROR("Unsupported codec requested (%s)\n",
+              StreamCodecToStr(options.codec));
+    ROS_ERROR("supported encoder codecs are:\n");
+    ROS_ERROR("  * h264\n");
+    ROS_ERROR("  * h265\n");
+    ROS_ERROR("  * vp8\n");
+    ROS_ERROR("  * vp9\n");
+    ROS_ERROR("  * mjpeg\n");
+  }
+
+  // to be continued
+
   return false;
-}
+};
 
 }  // namespace common
 }  // namespace zetton

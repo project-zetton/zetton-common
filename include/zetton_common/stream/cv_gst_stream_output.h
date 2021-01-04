@@ -1,6 +1,7 @@
 #pragma once
 
 #include <atomic>
+#include <opencv2/videoio.hpp>
 #include <thread>
 
 #include "opencv2/opencv.hpp"
@@ -24,12 +25,14 @@ class CvGstStreamOutput : public BaseStreamOutput {
 
   void SetStatus(const char* str) override;
 
-
-protected:
-
+ protected:
   bool BuildPipelineString();
+
   std::string pipeline_string_;
-  std::shared_ptr<cv::VideoCapture> cap_;
+  std::shared_ptr<cv::VideoWriter> writer_;
+
+  // std::shared_ptr<std::thread> thread_rendering_;
+  // std::atomic<bool> stop_flag_{false};
 };
 
 }  // namespace common

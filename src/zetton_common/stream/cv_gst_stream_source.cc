@@ -90,8 +90,8 @@ bool CvGstStreamSource::IsSupportedExtension(const char* ext) {
 
 bool CvGstStreamSource::BuildPipelineString() {
   const StreamUri& uri = GetResource();
-  return BuildGstPipelineString(uri, options_, pipeline_string_,
-                                use_custom_size_, use_custom_rate_);
+  return BuildGstCapturingPipelineString(uri, options_, pipeline_string_,
+                                         use_custom_size_, use_custom_rate_);
 }
 
 }  // namespace common
