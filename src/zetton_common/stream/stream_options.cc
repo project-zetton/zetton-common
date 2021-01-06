@@ -149,12 +149,12 @@ StreamOptions::StreamOptions() {
   num_buffers = 4;
   loop = 0;
   zero_copy = true;
+  async = false;
   io_type = StreamIoType::IO_INPUT;
   device_type = StreamDeviceType::DEVICE_DEFAULT;
   flip_method = StreamFlipMethod::FLIP_NONE;
   codec = StreamCodec::CODEC_UNKNOWN;
 }
-
 
 }  // namespace common
 }  // namespace zetton

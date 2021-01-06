@@ -6,11 +6,12 @@
 int main(int argc, char** argv) {
   // prepare stream url
   std::string url =
-      "rtsp://freja.hiof.no:1935/rtplive/_definst_/hessdalen02.stream";
+      "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";
   zetton::common::StreamOptions options;
   options.resource = url;
   options.platform = zetton::common::StreamPlatformType::PLATFORM_CPU;
   options.codec = zetton::common::StreamCodec::CODEC_H264;
+  options.async = false;
 
   // init streamer
   std::shared_ptr<zetton::common::CvGstStreamSource> source;
@@ -21,7 +22,7 @@ int main(int argc, char** argv) {
   while (true) {
     cv::Mat frame;
     if (source->Capture(frame)) {
-      ROS_INFO("Recv frame: %dx%d", frame.cols, frame.rows);
+      ROS_WARN("Recv frame: %dx%d", frame.cols, frame.rows);
     }
     usleep(100000);
   }

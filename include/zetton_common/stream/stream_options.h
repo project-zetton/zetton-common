@@ -76,6 +76,7 @@ struct StreamOptions {
   uint32_t num_buffers;
   bool zero_copy;
   int loop;
+  bool async;
 
   StreamDeviceType device_type;
   StreamIoType io_type;

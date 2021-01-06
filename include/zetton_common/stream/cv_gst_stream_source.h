@@ -41,7 +41,7 @@ class CvGstStreamSource : public BaseStreamSource {
   std::atomic<bool> stop_flag_{false};
 
   std::function<void(const cv::Mat& frame)> callback_;
-  bool callback_registered_;
+  bool callback_registered_ = false;
 };
 
 }  // namespace common

@@ -59,8 +59,8 @@ bool CvGstStreamSource::Init(const std::string& pipeline) {
 void CvGstStreamSource::CaptureFrames() {
   while (!stop_flag_) {
     cv::Mat frame;
-    cap_->read(frame);
-    if (!frame.empty()) {
+    auto ret = cap_->read(frame);
+    if (ret && !frame.empty()) {
       buffer_->put(frame);
       if (callback_registered_) {
         try {
