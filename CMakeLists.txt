@@ -25,6 +25,7 @@ pkg_check_modules(GST REQUIRED
 find_package(catkin REQUIRED COMPONENTS
     roscpp
     )
+catkin_python_setup()
 catkin_package(
     INCLUDE_DIRS include
     LIBRARIES ${PROJECT_NAME}
@@ -73,5 +74,12 @@ install(DIRECTORY include/${PROJECT_NAME}/
 install(DIRECTORY config/
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config
     PATTERN ".svn" EXCLUDE)
+
+file(GLOB_RECURSE
+    python_excutables
+    ${PROJECT_SOURCE_DIR}/example/*.py
+    )
+catkin_install_python(PROGRAMS ${python_excutables}
+    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 add_simple_examples()
