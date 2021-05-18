@@ -25,6 +25,7 @@ struct StreamUri {
   std::string location;
   std::string extension;
   int port;
+  std::string mountpoint;
 
   StreamUri();
   explicit StreamUri(const char* uri);

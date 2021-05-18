@@ -15,6 +15,11 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/util.cmake)
 # find dependencies
 find_package(Threads REQUIRED)
 find_package(OpenCV 4 REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GST REQUIRED
+    gstreamer-1.0
+    gstreamer-app-1.0
+    gstreamer-rtsp-server-1.0)
 
 # ROS
 find_package(catkin REQUIRED COMPONENTS
@@ -31,6 +36,7 @@ include_directories(
     include
     ${catkin_INCLUDE_DIRS}
     ${OpenCV_INCLUDE_DIRS}
+    ${GST_INCLUDE_DIRS}
 )
 
 # find all source files
@@ -51,6 +57,7 @@ target_link_libraries(
     ${catkin_LIBRARIES}
     Threads::Threads
     ${OpenCV_LIBS}
+    ${GST_LIBRARIES}
 )
 
 # installation

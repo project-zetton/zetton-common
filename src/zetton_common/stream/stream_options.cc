@@ -132,6 +132,42 @@ const char* StreamPlatformTypeToStr(StreamPlatformType platform) {
   }
 }
 
+StreamPixelFormat StreamPixelFormatFromStr(const char* str) {
+  if (!str) return PIXEL_FORMAT_UNKNOWN;
+  for (int n = 0; n < PIXEL_FORMAT_MAX_NUM; n++) {
+    const StreamPixelFormat value = (StreamPixelFormat)n;
+    if (strcasecmp(str, StreamPixelFormatToStr(value)) == 0) return value;
+  }
+  return PIXEL_FORMAT_UNKNOWN;
+}
+
+const char* StreamPixelFormatToStr(StreamPixelFormat pixel_format) {
+  switch (pixel_format) {
+    case PIXEL_FORMAT_RGB:
+      return "RGB";
+    case PIXEL_FORMAT_RGB16:
+      return "RGB16";
+    case PIXEL_FORMAT_RGBA:
+      return "RGBA";
+    case PIXEL_FORMAT_RGBA16:
+      return "RGBA16";
+    case PIXEL_FORMAT_BGR:
+      return "BGR";
+    case PIXEL_FORMAT_BGR16:
+      return "BGR16";
+    case PIXEL_FORMAT_BGRA:
+      return "BGRA";
+    case PIXEL_FORMAT_BGRA16:
+      return "BGRA16";
+    case PIXEL_FORMAT_GRAY8:
+      return "GRAY8";
+    case PIXEL_FORMAT_GRAY16_LE:
+      return "GRAY16_LE";
+    default:
+      return "BGR";
+  }
+}
+
 StreamPlatformType StreamPlatformTypeFromStr(const char* str) {
   if (!str) return StreamPlatformType::PLATFORM_CPU;
   for (int n = 0; n < PLATFORM_MAX_NUM; n++) {
@@ -154,6 +190,7 @@ StreamOptions::StreamOptions() {
   device_type = StreamDeviceType::DEVICE_DEFAULT;
   flip_method = StreamFlipMethod::FLIP_NONE;
   codec = StreamCodec::CODEC_UNKNOWN;
+  pixel_format = StreamPixelFormat::PIXEL_FORMAT_BGR;
 }
 
 }  // namespace common

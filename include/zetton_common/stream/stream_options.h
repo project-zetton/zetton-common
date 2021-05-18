@@ -56,10 +56,29 @@ enum StreamCodec {
 const char* StreamCodecToStr(StreamCodec codec);
 StreamCodec StreamCodecFromStr(const char* str);
 
+enum StreamPixelFormat {
+  PIXEL_FORMAT_UNKNOWN = 0,
+  PIXEL_FORMAT_RGB,
+  PIXEL_FORMAT_RGB16,
+  PIXEL_FORMAT_RGBA,
+  PIXEL_FORMAT_RGBA16,
+  PIXEL_FORMAT_BGR,
+  PIXEL_FORMAT_BGR16,
+  PIXEL_FORMAT_BGRA,
+  PIXEL_FORMAT_BGRA16,
+  PIXEL_FORMAT_GRAY8,
+  PIXEL_FORMAT_GRAY16_LE,
+  PIXEL_FORMAT_MAX_NUM
+};
+
+const char* StreamPixelFormatToStr(StreamPixelFormat pixel_format);
+StreamPixelFormat StreamPixelFormatFromStr(const char* str);
+
 enum StreamPlatformType {
   PLATFORM_CPU = 0,
   PLATFORM_GPU,
   PLATFORM_JETSON,
+  PLATFORM_ROCKCHIP,
   PLATFORM_MAX_NUM
 };
 
@@ -82,6 +101,7 @@ struct StreamOptions {
   StreamIoType io_type;
   StreamFlipMethod flip_method;
   StreamCodec codec;
+  StreamPixelFormat pixel_format;
   StreamPlatformType platform;
 
  public:

@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include <algorithm>
+#include <clocale>
 #include <iostream>
 
 #include "zetton_common/util/filesystem.h"
@@ -142,6 +143,12 @@ bool StreamUri::Parse(const char* uri) {
 
     // parse the port number
     if (port_str.size() != 0) {
+      // parse mountpoint
+      pos = port_str.find("/");
+      if (pos != std::string::npos) {
+        mountpoint = port_str.substr(pos, std::string::npos);
+        port_str = port_str.substr(0, pos);
+      }
       if (sscanf(port_str.c_str(), "%i", &port) != 1) {
         if (protocol_string == "rtsp") {
           ROS_WARN("Missing/invalid IP port from %s, default to port 554",
