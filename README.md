@@ -12,6 +12,9 @@ Recommended environment:
 
 - Ubuntu 18.04
 - ROS Melodic
+- OpenCV 4
+- [abseil-cpp](https://github.com/abseil/abseil-cpp)
+- [fmt](https://github.com/fmtlib/fmt)
 
 ## License
 

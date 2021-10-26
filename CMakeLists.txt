@@ -15,6 +15,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/util.cmake)
 # find dependencies
 find_package(Threads REQUIRED)
 find_package(OpenCV 4 REQUIRED)
+find_package(absl REQUIRED)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/fmt)
 
 # ROS
@@ -53,6 +54,7 @@ target_link_libraries(
     Threads::Threads
     ${OpenCV_LIBS}
     fmt::fmt
+    absl::time
 )
 
 # installation
