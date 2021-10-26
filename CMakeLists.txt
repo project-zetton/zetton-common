@@ -15,17 +15,11 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/util.cmake)
 # find dependencies
 find_package(Threads REQUIRED)
 find_package(OpenCV 4 REQUIRED)
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(GST REQUIRED
-    gstreamer-1.0
-    gstreamer-app-1.0
-    gstreamer-rtsp-server-1.0)
 
 # ROS
 find_package(catkin REQUIRED COMPONENTS
     roscpp
     )
-catkin_python_setup()
 catkin_package(
     INCLUDE_DIRS include
     LIBRARIES ${PROJECT_NAME}
@@ -37,7 +31,6 @@ include_directories(
     include
     ${catkin_INCLUDE_DIRS}
     ${OpenCV_INCLUDE_DIRS}
-    ${GST_INCLUDE_DIRS}
 )
 
 # find all source files
@@ -58,7 +51,6 @@ target_link_libraries(
     ${catkin_LIBRARIES}
     Threads::Threads
     ${OpenCV_LIBS}
-    ${GST_LIBRARIES}
 )
 
 # installation
@@ -74,12 +66,5 @@ install(DIRECTORY include/${PROJECT_NAME}/
 install(DIRECTORY config/
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config
     PATTERN ".svn" EXCLUDE)
-
-file(GLOB_RECURSE
-    python_excutables
-    ${PROJECT_SOURCE_DIR}/example/*.py
-    )
-catkin_install_python(PROGRAMS ${python_excutables}
-    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 add_simple_examples()
