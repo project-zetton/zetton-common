@@ -71,7 +71,7 @@ size_t GetFileSize(const std::string& path) {
   const int result = stat(path.c_str(), &fileStat);
 
   if (result == -1) {
-    ROS_ERROR("%s does not exist.", path.c_str());
+    AERROR_F("{} does not exist.", path);
     return 0;
   }
 

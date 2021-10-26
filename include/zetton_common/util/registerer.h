@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "ros/ros.h"
+#include "zetton_common/util/log.h"
 
 namespace zetton {
 namespace common {
@@ -79,9 +79,9 @@ bool GetRegisteredClasses(
       FactoryMap::iterator iter = map.find(name);                          \
       if (iter == map.end()) {                                             \
         for (auto c : map) {                                               \
-          ROS_ERROR_STREAM("Instance:" << c.first);                        \
+          AERROR_F("Instance: {}", c.first);                               \
         }                                                                  \
-        ROS_ERROR_STREAM("Get instance " << name << " failed.");           \
+        AERROR_F("Get instance {} failed.", name);                         \
         return nullptr;                                                    \
       }                                                                    \
       Any object = iter->second->NewInstance();                            \
@@ -100,14 +100,14 @@ bool GetRegisteredClasses(
     static const ::std::string GetUniqInstanceName() {                     \
       FactoryMap &map = ::zetton::common::GlobalFactoryMap()[#base_class]; \
       if (1 != map.size()) {                                               \
-        ROS_FATAL_STREAM("map.size() != 1 (" << map.size() << "vs 1)");    \
+        AFATAL_F("map.size() != 1 ({} vs 1)", map.size());                 \
       }                                                                    \
       return map.begin()->first;                                           \
     }                                                                      \
     static base_class *GetUniqInstance() {                                 \
       FactoryMap &map = ::zetton::common::GlobalFactoryMap()[#base_class]; \
       if (1 != map.size()) {                                               \
-        ROS_FATAL_STREAM("map.size() != 1 (" << map.size() << "vs 1)");    \
+        AFATAL_F("map.size() != 1 ({} vs 1)", map.size());                 \
       }                                                                    \
       Any object = map.begin()->second->NewInstance();                     \
       return *(object.AnyCast<base_class *>());                            \

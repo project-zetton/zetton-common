@@ -1,17 +1,18 @@
 #pragma once
 
 #include "ros/ros.h"
+#include "zetton_common/util/log.h"
 #include "zetton_common/util/macros.h"
 
 namespace zetton {
 namespace common {
 
 #ifndef GPARAM
-#define GPARAM(x, y)                         \
-  do {                                       \
-    if (!nh_->getParam(x, y)) {              \
-      ROS_FATAL("get pararm " #x " error!"); \
-    }                                        \
+#define GPARAM(x, y)                        \
+  do {                                      \
+    if (!nh_->getParam(x, y)) {             \
+      AFATAL_F("get pararm {} error!", #x); \
+    }                                       \
   } while (0)
 #endif
 
@@ -40,7 +41,6 @@ class RosNodeHandler {
 
   DECLARE_SINGLETON(RosNodeHandler)
 };
-
 
 }  // namespace common
 }  // namespace zetton

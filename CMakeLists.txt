@@ -15,6 +15,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/util.cmake)
 # find dependencies
 find_package(Threads REQUIRED)
 find_package(OpenCV 4 REQUIRED)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/fmt)
 
 # ROS
 find_package(catkin REQUIRED COMPONENTS
@@ -51,10 +52,16 @@ target_link_libraries(
     ${catkin_LIBRARIES}
     Threads::Threads
     ${OpenCV_LIBS}
+    fmt::fmt
 )
 
 # installation
 install(TARGETS ${PROJECT_NAME}
+    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
+    )
+install(TARGETS fmt
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
