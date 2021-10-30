@@ -52,11 +52,11 @@ class BaseStream {
 
  protected:
   std::string url_;
-
-  ZETTON_REGISTER_REGISTERER(BaseStream);
-#define ZETTON_REGISTER_STREAM(name) ZETTON_REGISTER_CLASS(BaseStream, name)
 };
 
-}  // namespace lagecy
+ZETTON_REGISTER_REGISTERER(BaseStream);
+#define ZETTON_REGISTER_STREAM(name) ZETTON_REGISTER_CLASS(BaseStream, name)
+
+}  // namespace legacy
 }  // namespace common
 }  // namespace zetton

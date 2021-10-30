@@ -55,6 +55,8 @@ target_link_libraries(
     ${OpenCV_LIBS}
     fmt::fmt
     absl::time
+    absl::flags
+    absl::flags_parse
 )
 
 # installation
