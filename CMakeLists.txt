@@ -16,7 +16,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/util.cmake)
 find_package(Threads REQUIRED)
 find_package(OpenCV 4 REQUIRED)
 find_package(absl REQUIRED)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/fmt)
+find_package(fmt REQUIRED)
 
 # ROS
 find_package(catkin REQUIRED COMPONENTS
