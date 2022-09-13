@@ -1,3 +1,5 @@
+// clang-format off
+
 #ifndef _WIN32
 // Disable all warnings from gcc/clang:
 #pragma GCC diagnostic push
