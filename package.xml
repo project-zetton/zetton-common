@@ -3,7 +3,7 @@
 <package format="3">
   <name>zetton_common</name>
   <version>2.0.0</version>
-  <description>Common definitions and utilities in ROS environment for Project Zetton.</description>
+  <description>Common definitions and utilities for Project Zetton.</description>
   <maintainer email="xxdsox@gmail.com">Yusu Pan</maintainer>
   <license>BSD 2-Clause</license>
   <url type="repository">https://github.com/project-zetton/zetton-common</url>
