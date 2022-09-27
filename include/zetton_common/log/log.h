@@ -25,8 +25,17 @@
 #define ACHECK_EQ(expr1, expr2) CHECK_EQ_S(expr1, expr2)
 #define ACHECK_EQ_F(a, b, ...) CHECK_EQ_F(a, b, ##__VA_ARGS__)
 
+#define ACHECK_LE(expr1, expr2) CHECK_LE_S(expr1, expr2)
+#define ACHECK_LE_F(a, b, ...) CHECK_LE_F(a, b, ##__VA_ARGS__)
+
 #define ACHECK_GE(expr1, expr2) CHECK_GE_S(expr1, expr2)
 #define ACHECK_GE_F(a, b, ...) CHECK_GE_F(a, b, ##__VA_ARGS__)
+
+#define ACHECK_LT(expr1, expr2) CHECK_LT_S(expr1, expr2)
+#define ACHECK_LT_F(a, b, ...) CHECK_LT_F(a, b, ##__VA_ARGS__)
+
+#define ACHECK_GT(expr1, expr2) CHECK_GT_S(expr1, expr2)
+#define ACHECK_GT_F(a, b, ...) CHECK_GT_F(a, b, ##__VA_ARGS__)
 
 #define ACHECK_NOTNULL(x) CHECK_NOTNULL_S(x)
 #define ACHECK_NOTNULL_F(x, ...) CHECK_NOTNULL_F(x, ##__VA_ARGS__)

@@ -1,3 +1,5 @@
+// clang-format off
+
 /*
 Loguru logging library for C++, by Emil Ernerfeldt.
 www.github.com/emilk/loguru
@@ -1449,3 +1451,5 @@ namespace loguru
 #endif // LOGURU_WITH_STREAMS
 
 #endif // LOGURU_HAS_DECLARED_STREAMS_HEADER
+
+// clang-format on

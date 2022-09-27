@@ -1,9 +1,10 @@
 # zetton-common
 
-Common definitions and utilities in ROS environment for Project Zetton.
+Common definitions and utilities for Project Zetton.
 
 ## News
 
+- (2022-09-13) this repo is conevrted into a pure CMake package.
 - (2021-10-26) stream-related module is moved to an individual repo [zetton-stream](https://github.com/project-zetton/zetton-stream).
 
 ## Prerequisites
@@ -11,7 +12,6 @@ Common definitions and utilities in ROS environment for Project Zetton.
 Recommended environment:
 
 - Ubuntu 18.04
-- ROS Melodic
 - OpenCV 4
 - [abseil-cpp](https://github.com/abseil/abseil-cpp)
 - [fmt](https://github.com/fmtlib/fmt)

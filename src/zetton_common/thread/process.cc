@@ -7,9 +7,9 @@
 namespace zetton {
 namespace common {
 
-pid_t Process::GetID() { getpid(); }
+pid_t Process::GetID() { return getpid(); }
 
-pid_t Process::GetParentID() { getppid(); }
+pid_t Process::GetParentID() { return getppid(); }
 
 std::string Process::GetExecutablePath() {
   char buf[512];
@@ -27,7 +27,7 @@ std::string Process::GetExecutableDirectory() {
 
 std::string Process::GetWorkingDirectory() {
   char buf[1024];
-  char* str = getcwd(buf, sizeof(buf));
+  char *str = getcwd(buf, sizeof(buf));
   if (!str) return "";
   return buf;
 }

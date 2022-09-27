@@ -1,7 +1,5 @@
 #include "zetton_common/util/registerer.h"
 
-#include "ros/ros.h"
-
 namespace zetton {
 namespace common {
 
