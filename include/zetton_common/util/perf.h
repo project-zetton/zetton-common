@@ -3,6 +3,7 @@
 #include <chrono>
 #include <map>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "zetton_common/log/log.h"
@@ -15,6 +16,15 @@ class TimeCounter {
   void Start() { begin_ = std::chrono::system_clock::now(); }
 
   void End() { end_ = std::chrono::system_clock::now(); }
+  void End(const std::string& msg) {
+    end_ = std::chrono::system_clock::now();
+    auto elapsed_time =
+        std::chrono::duration_cast<std::chrono::nanoseconds>(end_ - begin_)
+            .count();
+    AINFO_F("TIMER {} elapsed_time: {} ms", msg,
+            static_cast<double>(elapsed_time) / 1000000.0);
+    begin_ = end_;
+  }
 
   double Duration() {
     auto duration =
@@ -35,6 +45,22 @@ class TimeCounter {
  private:
   std::chrono::time_point<std::chrono::system_clock> begin_;
   std::chrono::time_point<std::chrono::system_clock> end_;
+};
+
+class TimeCounterWrapper {
+ public:
+  explicit TimeCounterWrapper(std::string msg) : msg_(std::move(msg)) {
+    timer_.Start();
+  }
+
+  ~TimeCounterWrapper() { timer_.End(msg_); }
+
+  TimeCounterWrapper(const TimeCounterWrapper&) = delete;
+  TimeCounterWrapper& operator=(const TimeCounterWrapper&) = delete;
+
+ private:
+  TimeCounter timer_;
+  std::string msg_;
 };
 
 class FpsCalculator {
@@ -102,6 +128,58 @@ class FpsCalculator {
   zetton::common::TimeCounter tc_;
   std::vector<double> time_of_runtime_;
 };
+
+#ifdef ZETTON_DISABLE_PERF
+
+// disable macros.
+#define ZETTON_PERF_FUNCTION()
+
+#define ZETTON_PERF_FUNCTION_WITH_INDICATOR(indicator)
+
+#define ZETTON_PERF_BLOCK_START()
+
+#define ZETTON_PERF_BLOCK_END(msg)
+
+#define ZETTON_PERF_BLOCK_END_WITH_INDICATOR(indicator, msg)
+
+#else
+
+inline std::string get_full_name(const std::string& full_name) {
+  std::size_t end = full_name.find('(');
+  if (end == std::string::npos) {
+    return full_name;
+  }
+  std::string new_str = full_name.substr(0, end);
+  std::size_t start = new_str.rfind(' ');
+  if (start == std::string::npos) {
+    return full_name;
+  }
+  return new_str.substr(start + 1);
+}
+
+inline std::string get_full_name(const std::string& full_name,
+                                 const std::string& indicator) {
+  return indicator + "_" + get_full_name(full_name);
+}
+
+#define ZETTON_PERF_FUNCTION()                        \
+  zetton::common::TimeCounterWrapper _timer_wrapper_( \
+      zetton::common::get_full_name(__PRETTY_FUNCTION__))
+
+#define ZETTON_PERF_FUNCTION_WITH_INDICATOR(indicator) \
+  zetton::common::TimeCounterWrapper _timer_wrapper_(  \
+      zetton::common::get_full_name(__PRETTY_FUNCTION__, indicator))
+
+#define ZETTON_PERF_BLOCK_START()      \
+  zetton::common::TimeCounter _timer_; \
+  _timer_.Start()
+
+#define ZETTON_PERF_BLOCK_END(msg) _timer_.End(msg)
+
+#define ZETTON_PERF_BLOCK_END_WITH_INDICATOR(indicator, msg) \
+  _timer_.End(indicator + "_" + msg)
+
+#endif  // ZETTON_DISABLE_PERF
 
 }  // namespace common
 }  // namespace zetton
