@@ -2,19 +2,22 @@
 
 Common definitions and utilities for Project Zetton.
 
+## Table of Contents
+
+- [zetton-common](#zetton-common)
+  - [Table of Contents](#table-of-contents)
+  - [News](#news)
+  - [Documentation](#documentation)
+  - [License](#license)
+
 ## News
 
 - (2022-09-13) this repo is conevrted into a pure CMake package.
 - (2021-10-26) stream-related module is moved to an individual repo [zetton-stream](https://github.com/project-zetton/zetton-stream).
 
-## Prerequisites
+## Documentation
 
-Recommended environment:
-
-- Ubuntu 18.04
-- OpenCV 4
-- [abseil-cpp](https://github.com/abseil/abseil-cpp)
-- [fmt](https://github.com/fmtlib/fmt)
+- [Quick Start](docs/quickstart/README.md)
 
 ## License
 
