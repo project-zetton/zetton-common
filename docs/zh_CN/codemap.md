@@ -52,6 +52,7 @@ tree -L 3
 
 其中：
 
+- `.github/`：GitHub 相关的配置文件
 - `cmake/` 与 `CMakeLists.txt`：CMake 构建相关的文件
 - `docs/`：文档目录
 - `include/`：头文件目录
@@ -60,6 +61,7 @@ tree -L 3
 - `tool/`：工具脚本目录
 - `LICENSE`：软件包许可证
 - `README.md`：软件包说明文档
+- `README_zh-CN.md`：软件包说明文档（中文）
 - `package.xml`：软件包描述文件，用于 colcon 构建
 
 ## 模块介绍

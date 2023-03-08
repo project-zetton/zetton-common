@@ -1,5 +1,7 @@
 # Contributing to Project Zetton
 
+English | [中文](CONTRIBUTING_zh-CN.md)
+
 Welcome to the zetton-common community, we are committed to building a cutting-edge robot and computer vision foundational library and all kinds of contributions are welcomed, including but not limited to
 
 **Fix bug**

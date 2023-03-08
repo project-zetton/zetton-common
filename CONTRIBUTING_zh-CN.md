@@ -1,5 +1,7 @@
 # 代码贡献指南
 
+[English](CONTRIBUTING.md) | 中文
+
 - [代码贡献指南](#代码贡献指南)
   - [Pull Request 工作流程](#pull-request-工作流程)
     - [1. 复制和克隆](#1-复制和克隆)
