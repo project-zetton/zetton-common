@@ -20,9 +20,9 @@ Project Zetton 的通用定义和实用工具包。
 
 ## 文档
 
-- [快速入门](docs/zh_CN/quickstart/README.md)
+- [快速入门](docs/en/get_started.md)
 
-- [代码地图](docs/zh_CN/specs/codemap.md)
+- [代码地图](docs/en/codemap.md)
 
 ## 许可证
 

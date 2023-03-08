@@ -19,8 +19,8 @@ Common definitions and utilities for Project Zetton.
 
 ## Documentation
 
-- [Quick Start](docs/zh_CN/quickstart/README.md)
-- [Code Map](docs/zh_CN/specs/codemap.md)
+- [Quick Start](docs/en/get_started.md)
+- [Code Map](docs/en/specs/codemap.md)
 
 ## License
 
