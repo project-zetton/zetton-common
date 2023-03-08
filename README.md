@@ -1,5 +1,7 @@
 # zetton-common
 
+English | [中文](README_CN.md)
+
 Common definitions and utilities for Project Zetton.
 
 ## Table of Contents
@@ -17,7 +19,8 @@ Common definitions and utilities for Project Zetton.
 
 ## Documentation
 
-- [Quick Start](docs/quickstart/README.md)
+- [Quick Start](docs/zh_CN/quickstart/README.md)
+- [Code Map](docs/zh_CN/specs/codemap.md)
 
 ## License
 
